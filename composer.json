@@ -2,10 +2,9 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": ">=7.4.0"
+        "php": ">=8.0.1"
     },
     "require-dev": {
-        "ekino/phpstan-banned-code": "^0.3.1",
         "friendsofphp/php-cs-fixer": "^2.16",
         "korbeil/phpstan-generic-rules": "^0.2.4",
         "phpstan/phpstan": "^0.12.18",
