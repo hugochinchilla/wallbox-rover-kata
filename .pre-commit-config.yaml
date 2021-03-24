@@ -1,0 +1,13 @@
+repos:
+-   repo: local
+    hooks:
+        -   id: phpstan
+            name: Run static analysis with PHPStan
+            language: system
+            entry: make phpstan
+            files: ^.*\.php$
+        -   id: phpunit
+            name: Run automated tests
+            language: system
+            entry: make test
+            files: ^.*\.php$
