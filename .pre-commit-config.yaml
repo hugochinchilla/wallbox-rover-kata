@@ -11,3 +11,8 @@ repos:
             language: system
             entry: make test
             files: ^.*\.php$
+        -   id: php-cs-fixer
+            name: Enforce coding standards
+            language: system
+            entry: make fixer
+            files: ^.*\.php$
