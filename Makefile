@@ -6,10 +6,10 @@ deps:
 	docker-compose run --rm php composer install
 
 test:
-	docker-compose run --rm php php ./vendor/bin/phpunit
+	docker-compose run --rm php composer test
 
 fixer:
-	docker-compose run --rm php php ./vendor/bin/php-cs-fixer fix
+	docker-compose run --rm php composer cs:fix
 
 phpstan:
-	docker-compose run --rm php php ./vendor/bin/phpstan analyse -c .phpstan.neon --debug --level 8 --memory-limit=1G src tests
+	docker-compose run --rm php composer phpstan

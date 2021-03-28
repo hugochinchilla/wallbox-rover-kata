@@ -4,15 +4,15 @@ repos:
         -   id: phpstan
             name: Run static analysis with PHPStan
             language: system
-            entry: make phpstan
+            entry: docker-compose run --rm php composer phpstan
             files: ^.*\.php$
         -   id: phpunit
             name: Run automated tests
             language: system
-            entry: make test
+            entry: docker-compose run --rm php composer test
             files: ^.*\.php$
         -   id: php-cs-fixer
             name: Enforce coding standards
             language: system
-            entry: make fixer
+            entry: "docker-compose run --rm php composer cs:fix -- "
             files: ^.*\.php$
