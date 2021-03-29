@@ -10,7 +10,8 @@
         "phpstan/phpstan": "^0.12.18",
         "phpstan/phpstan-deprecation-rules": "^0.12.2",
         "phpstan/phpstan-phpunit": "^0.12.7",
-        "phpunit/phpunit": "^9"
+        "phpunit/phpunit": "^9",
+        "qossmic/deptrac-shim": "^0.12.0"
     },
     "config": {
         "preferred-install": {
@@ -31,6 +32,7 @@
     "scripts": {
         "test": "phpunit",
         "cs:fix": "vendor/bin/php-cs-fixer fix --config .php_cs.dist",
-        "phpstan": "vendor/bin/phpstan analyse -c .phpstan.neon --debug --level 8 --memory-limit=1G src tests"
+        "phpstan": "vendor/bin/phpstan analyse -c .phpstan.neon --debug --level 8 --memory-limit=1G src tests",
+        "deptrac": "vendor/bin/deptrac analyze .depfile.yaml --fail-on-uncovered --report-uncovered"
     }
 }

@@ -6,6 +6,7 @@ var/
 .idea
 .env
 .DS_Store
+.deptrac.cache
 
 ###> phpunit/phpunit ###
 /phpunit.xml

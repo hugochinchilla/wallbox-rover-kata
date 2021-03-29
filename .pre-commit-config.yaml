@@ -16,3 +16,9 @@ repos:
             language: system
             entry: "docker-compose run --rm php composer cs:fix -- "
             files: ^.*\.php$
+        -   id: deptrac
+            name: Enforce good architecture
+            language: system
+            entry: "docker-compose run --rm php composer deptrac"
+            files: ^.*\.php$
+            pass_filenames: false

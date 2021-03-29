@@ -1,0 +1,56 @@
+paths:
+    - ./src
+
+layers:
+    -   name: Delivery
+        collectors:
+            -   type: directory
+                regex: src/Core/Controller/.*
+
+    -   name: UseCases
+        collectors:
+            -   type: directory
+                regex: src/Core/UseCase/.*
+
+    -   name: Domain
+        collectors:
+            -   type: bool
+                must:
+                    -   type: directory
+                        regex: src/Core/Domain/.*
+            -   type: className
+                regex: ^Ramsey\\Uuid\\.*
+
+    -   name: Infrastructure
+        collectors:
+            -   type: directory
+                regex: src/Core/Infrastructure/.*
+
+    -   name: Symfony
+        collectors:
+            -   type: className
+                regex: ^Symfony\\.*
+
+    -   name: Vendor
+        collectors:
+            -   type: className
+                regex: ^Doctrine\\.*
+
+
+ruleset:
+    Delivery:
+        - Symfony
+        - UseCases
+
+    UseCases:
+        - Domain
+
+    Domain:
+
+    Infrastructure:
+        - Domain
+        - Vendor
+        - Symfony
+        - UseCases
+
+skip_violations: [ ]

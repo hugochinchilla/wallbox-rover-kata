@@ -1,4 +1,4 @@
-.PHONY: all deps test fixer phpstan
+.PHONY: all deps test fixer phpstan deptrac
 
 all: deps test
 
@@ -13,3 +13,6 @@ fixer:
 
 phpstan:
 	docker-compose run --rm php composer phpstan
+
+deptrac:
+	docker-compose run --rm php composer deptrac
