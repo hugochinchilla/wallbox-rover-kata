@@ -65,7 +65,9 @@ class ElectricVehicleTest extends TestCase
      */
     public function an_ev_should_move_forward(string $command, string $expectedResult): void
     {
-        $result = $this->ev->execute($command);
+        $ev = new ElectricVehicle(new Surface(10,10), new Point(5,5), 'N');
+
+        $result = $ev->execute($command);
 
         $this->assertEquals($expectedResult, $result);
     }
@@ -73,10 +75,10 @@ class ElectricVehicleTest extends TestCase
     public function moveForwardProvider()
     {
         return [
-            'Can move facing N' => ['M', '0:1:N'],
-            'Can move facing W' => ['LM', '-1:0:W'],
-            'Can move facing S' => ['LLM', '0:-1:S'],
-            'Can move facing E' => ['RM', '1:0:E'],
+            'Can move facing N' => ['M', '5:6:N'],
+            'Can move facing W' => ['LM', '4:5:W'],
+            'Can move facing S' => ['LLM', '5:4:S'],
+            'Can move facing E' => ['RM', '6:5:E'],
         ];
     }
 
@@ -98,5 +100,12 @@ class ElectricVehicleTest extends TestCase
         $result = $ev->execute('M');
 
         $this->assertEquals($result, '1:0:E');
+    }
+
+    /** @test */
+    public function an_ev_can_not_move_to_an_invalid_position(): void
+    {
+        $this->expectException(\OutOfBoundsException::class);
+        $this->ev->execute('LM');
     }
 }
