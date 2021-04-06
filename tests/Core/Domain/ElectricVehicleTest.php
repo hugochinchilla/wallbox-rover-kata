@@ -3,6 +3,7 @@
 namespace Example\Tests\Core\Domain;
 
 use Example\App\Core\Domain\ElectricVehicle;
+use Example\App\Core\Domain\Surface;
 use PHPUnit\Framework\TestCase;
 
 class ElectricVehicleTest extends TestCase
@@ -12,7 +13,7 @@ class ElectricVehicleTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->ev = new ElectricVehicle();
+        $this->ev = new ElectricVehicle(new Surface(10, 10));
     }
 
     /**

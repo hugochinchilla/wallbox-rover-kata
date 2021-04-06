@@ -8,9 +8,11 @@ class ElectricVehicle
 {
     private string $direction;
     private Point $position;
+    private Surface $surface;
 
-    public function __construct()
+    public function __construct(Surface $surface)
     {
+        $this->surface = $surface;
         $this->direction = 'N';
         $this->position = new Point(0, 0);
     }
