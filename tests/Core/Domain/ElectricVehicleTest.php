@@ -57,11 +57,24 @@ class ElectricVehicleTest extends TestCase
         ];
     }
 
-    /** @test */
-    public function an_ev_should_move_forward(): void
+    /**
+     * @test
+     * @dataProvider moveForwardProvider
+     */
+    public function an_ev_should_move_forward(string $command, string $expectedResult): void
     {
-        $result = $this->ev->execute('M');
+        $result = $this->ev->execute($command);
 
-        $this->assertEquals('0:1:N', $result);
+        $this->assertEquals($expectedResult, $result);
+    }
+
+    public function moveForwardProvider()
+    {
+        return [
+            'Can move facing N' => ['M', '0:1:N'],
+            'Can move facing W' => ['LM', '-1:0:W'],
+            'Can move facing S' => ['LLM', '0:-1:S'],
+            'Can move facing E' => ['RM', '1:0:E'],
+        ];
     }
 }

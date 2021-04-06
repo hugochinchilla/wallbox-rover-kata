@@ -61,6 +61,15 @@ class ElectricVehicle
         if ($this->direction === 'N') {
             return new Point($this->position->x(), $this->position->y() + 1);
         }
+        if ($this->direction === 'W') {
+            return new Point($this->position->x() - 1, $this->position->y());
+        }
+        if ($this->direction === 'S') {
+            return new Point($this->position->x(), $this->position->y() - 1);
+        }
+        if ($this->direction === 'E') {
+            return new Point($this->position->x() + 1, $this->position->y());
+        }
 
         return $this->position;
     }
