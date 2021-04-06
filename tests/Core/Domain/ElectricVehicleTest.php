@@ -14,7 +14,7 @@ class ElectricVehicleTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->ev = new ElectricVehicle(new Surface(10, 10), new Point(0, 0));
+        $this->ev = new ElectricVehicle(new Surface(10, 10), new Point(0, 0), 'N');
     }
 
     /**
@@ -83,10 +83,20 @@ class ElectricVehicleTest extends TestCase
     /** @test */
     public function an_ev_can_start_at_any_point(): void
     {
-        $ev = new ElectricVehicle(new Surface(10, 10), new Point(1, 1));
+        $ev = new ElectricVehicle(new Surface(10, 10), new Point(1, 1), 'N');
 
         $result = $ev->execute('M');
 
         $this->assertEquals($result, '1:2:N');
+    }
+
+    /** @test */
+    public function an_ev_can_start_facing_anywhere(): void
+    {
+        $ev = new ElectricVehicle(new Surface(10, 10), new Point(0, 0), 'E');
+
+        $result = $ev->execute('M');
+
+        $this->assertEquals($result, '1:0:E');
     }
 }

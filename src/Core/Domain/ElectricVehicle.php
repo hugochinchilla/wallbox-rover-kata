@@ -10,11 +10,11 @@ class ElectricVehicle
     private Point $position;
     private Surface $surface;
 
-    public function __construct(Surface $surface, Point $startingPoint)
+    public function __construct(Surface $surface, Point $startingPoint, string $direction)
     {
         $this->surface = $surface;
         $this->surface->addElectricVheicle($this);
-        $this->direction = 'N';
+        $this->direction = $direction;
         $this->position = $startingPoint;
     }
 
