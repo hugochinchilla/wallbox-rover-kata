@@ -7,6 +7,7 @@ namespace Example\App\Core\Domain;
 class ElectricVehicle
 {
     private string $direction;
+    private Point $position;
 
     public function __construct()
     {
