@@ -3,6 +3,7 @@
 namespace Example\Tests\Core\Domain;
 
 use Example\App\Core\Domain\ElectricVehicle;
+use Example\App\Core\Domain\Point;
 use Example\App\Core\Domain\Surface;
 use PHPUnit\Framework\TestCase;
 
@@ -13,7 +14,7 @@ class ElectricVehicleTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->ev = new ElectricVehicle(new Surface(10, 10));
+        $this->ev = new ElectricVehicle(new Surface(10, 10), new Point(0, 0));
     }
 
     /**
@@ -77,5 +78,15 @@ class ElectricVehicleTest extends TestCase
             'Can move facing S' => ['LLM', '0:-1:S'],
             'Can move facing E' => ['RM', '1:0:E'],
         ];
+    }
+
+    /** @test */
+    public function an_ev_can_start_at_any_point(): void
+    {
+        $ev = new ElectricVehicle(new Surface(10, 10), new Point(1, 1));
+
+        $result = $ev->execute('M');
+
+        $this->assertEquals($result, '1:2:N');
     }
 }

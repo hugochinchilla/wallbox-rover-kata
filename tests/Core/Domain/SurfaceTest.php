@@ -32,7 +32,7 @@ class SurfaceTest extends TestCase
     public function a_position_occupied_by_an_ev_is_not_a_valid_destination(): void
     {
         $surface = new Surface(10,10);
-        new ElectricVehicle($surface);
+        new ElectricVehicle($surface, new Point(0, 0));
 
         $this->assertFalse($surface->isValidDestination(new Point(0, 0)));
     }
@@ -41,7 +41,7 @@ class SurfaceTest extends TestCase
     public function the_surface_tracks_ev_movements(): void
     {
         $surface = new Surface(10,10);
-        $ev = new ElectricVehicle($surface);
+        $ev = new ElectricVehicle($surface, new Point(0, 0));
         $ev->execute('M');
 
         $this->assertTrue($surface->isValidDestination(new Point(0, 0)));
