@@ -24,4 +24,9 @@ class Point
     {
         return "{$this->x}:{$this->y}";
     }
+
+    public function equals(Point $point): bool
+    {
+        return $point->x === $this->x && $point->y === $this->y;
+    }
 }

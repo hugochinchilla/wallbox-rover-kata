@@ -6,6 +6,11 @@ namespace Example\App\Core\Domain;
 
 class Surface
 {
+    /**
+     * @var ElectricVehicle[]
+     */
+    private array $vehicles = [];
+
     public function __construct(private int $maxX, private int $maxY)
     {
     }
@@ -20,6 +25,13 @@ class Surface
             return false;
         }
 
-        return true;
+        $obstacleCount = array_filter($this->vehicles, fn (ElectricVehicle $ev) => $ev->position()->equals($point));
+
+        return count($obstacleCount) === 0;
+    }
+
+    public function addElectricVheicle(ElectricVehicle $ev): void
+    {
+        $this->vehicles[] = $ev;
     }
 }

@@ -27,4 +27,13 @@ class SurfaceTest extends TestCase
         $this->assertFalse($surface->isValidDestination(new Point(-1, 0)));
         $this->assertFalse($surface->isValidDestination(new Point(0, -1)));
     }
+
+    /** @test */
+    public function a_position_occupied_by_an_ev_is_not_a_valid_destination(): void
+    {
+        $surface = new Surface(10,10);
+        new ElectricVehicle($surface);
+
+        $this->assertFalse($surface->isValidDestination(new Point(0, 0)));
+    }
 }

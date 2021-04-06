@@ -13,6 +13,7 @@ class ElectricVehicle
     public function __construct(Surface $surface)
     {
         $this->surface = $surface;
+        $this->surface->addElectricVheicle($this);
         $this->direction = 'N';
         $this->position = new Point(0, 0);
     }
@@ -74,6 +75,11 @@ class ElectricVehicle
             return new Point($this->position->x() + 1, $this->position->y());
         }
 
+        return $this->position;
+    }
+
+    public function position()
+    {
         return $this->position;
     }
 }
