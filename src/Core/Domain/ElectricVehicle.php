@@ -19,9 +19,17 @@ class ElectricVehicle
             if ($instruction === "L") {
                 $this->direction = $this->rotateLeft();
             }
+            if ($instruction === "R") {
+                $this->direction = $this->rotateRight();
+            }
         }
 
         return "0:0:" . $this->direction;
+    }
+
+    private function parseInstructions(string $command): array
+    {
+        return str_split($command, 1);
     }
 
     private function rotateLeft(): string
@@ -34,8 +42,13 @@ class ElectricVehicle
         ][$this->direction];
     }
 
-    private function parseInstructions(string $command): array
+    private function rotateRight()
     {
-        return str_split($command, 1);
+        return [
+            'N' => 'E',
+            'E' => 'S',
+            'S' => 'W',
+            'W' => 'N',
+        ][$this->direction];
     }
 }

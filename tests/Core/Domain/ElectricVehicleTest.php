@@ -29,4 +29,27 @@ class ElectricVehicleTest extends TestCase
             "If facing north, will face N after four rotations" => ["LLLL", "0:0:N"],
         ];
     }
+
+    /**
+     * @test
+     * @dataProvider rotateRightProvider
+     */
+    public function a_ev_should_rotate_right(string $command, string $expectedOutput): void
+    {
+        $ev = new ElectricVehicle();
+
+        $result = $ev->execute($command);
+
+        $this->assertEquals($expectedOutput, $result);
+    }
+
+    public function rotateRightProvider()
+    {
+        return [
+            "If facing north, will face E after one rotation" => ["R", "0:0:E"],
+            "If facing north, will face S after two rotations" => ["RR", "0:0:S"],
+            "If facing north, will face W after three rotations" => ["RRR", "0:0:W"],
+            "If facing north, will face N after four rotations" => ["RRRR", "0:0:N"],
+        ];
+    }
 }
