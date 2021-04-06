@@ -7,15 +7,21 @@ use PHPUnit\Framework\TestCase;
 
 class ElectricVehicleTest extends TestCase
 {
+    private ElectricVehicle $ev;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->ev = new ElectricVehicle();
+    }
+
     /**
      * @test
      * @dataProvider rotateLeftProvider
      */
-    public function a_ev_should_rotate_left(string $command, string $expectedOutput): void
+    public function an_ev_should_rotate_left(string $command, string $expectedOutput): void
     {
-        $ev = new ElectricVehicle();
-
-        $result = $ev->execute($command);
+        $result = $this->ev->execute($command);
 
         $this->assertEquals($expectedOutput, $result);
     }
@@ -34,11 +40,9 @@ class ElectricVehicleTest extends TestCase
      * @test
      * @dataProvider rotateRightProvider
      */
-    public function a_ev_should_rotate_right(string $command, string $expectedOutput): void
+    public function an_ev_should_rotate_right(string $command, string $expectedOutput): void
     {
-        $ev = new ElectricVehicle();
-
-        $result = $ev->execute($command);
+        $result = $this->ev->execute($command);
 
         $this->assertEquals($expectedOutput, $result);
     }
@@ -51,5 +55,13 @@ class ElectricVehicleTest extends TestCase
             "If facing north, will face W after three rotations" => ["RRR", "0:0:W"],
             "If facing north, will face N after four rotations" => ["RRRR", "0:0:N"],
         ];
+    }
+
+    /** @test */
+    public function an_ev_should_move_forward(): void
+    {
+        $result = $this->ev->execute('M');
+
+        $this->assertEquals('0:1:N', $result);
     }
 }

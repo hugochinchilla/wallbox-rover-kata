@@ -10,21 +10,25 @@ class ElectricVehicle
 
     public function __construct()
     {
-        $this->direction = "N";
+        $this->direction = 'N';
+        $this->position = new Point(0, 0);
     }
 
     public function execute(string $command): string
     {
         foreach ($this->parseInstructions($command) as $instruction) {
-            if ($instruction === "L") {
+            if ($instruction === 'L') {
                 $this->direction = $this->rotateLeft();
             }
-            if ($instruction === "R") {
+            if ($instruction === 'R') {
                 $this->direction = $this->rotateRight();
+            }
+            if ($instruction === 'M') {
+                $this->position = $this->moveForward();
             }
         }
 
-        return "0:0:" . $this->direction;
+        return $this->position->toString() . ':' . $this->direction;
     }
 
     private function parseInstructions(string $command): array
@@ -50,5 +54,14 @@ class ElectricVehicle
             'S' => 'W',
             'W' => 'N',
         ][$this->direction];
+    }
+
+    private function moveForward()
+    {
+        if ($this->direction === 'N') {
+            return new Point($this->position->x(), $this->position->y() + 1);
+        }
+
+        return $this->position;
     }
 }
