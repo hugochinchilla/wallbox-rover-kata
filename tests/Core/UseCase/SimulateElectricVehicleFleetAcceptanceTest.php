@@ -74,4 +74,16 @@ class SimulateElectricVehicleFleetAcceptanceTest extends TestCase
 
         $simulator->execute();
     }
+
+    /** @test */
+    public function handle_input_with_vehicles_without_commands(): void
+    {
+        $input = new StringFleetInput("2 2\n1 1 N\n0 0 E\nM\n");
+        $output = new StringFleetOutput();
+        $simulator = new SimulateElectricVehicleFleet($input, $output);
+
+        $result = $simulator->execute();
+
+        $this->assertEquals("1 1 N\n1 0 E\n", $result);
+    }
 }

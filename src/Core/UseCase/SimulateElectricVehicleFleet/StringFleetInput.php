@@ -42,7 +42,13 @@ class StringFleetInput implements FleetInput
 
     public function commandsForEv(ElectricVehicle $ev): string
     {
-        return $this->commands[spl_object_hash($ev)];
+        $evKey = spl_object_hash($ev);
+
+        if (!isset($this->commands[$evKey])) {
+            return '';
+        }
+
+        return $this->commands[$evKey];
     }
 
     private function splitLines(string $input): array
@@ -60,12 +66,17 @@ class StringFleetInput implements FleetInput
 
     private function readEvsAndCommands(): void
     {
-        $evInstructions = array_chunk(array_filter($this->lines), 2);
-
-        foreach ($evInstructions as $instruction) {
-            $ev = $this->parseEvLine($instruction[0]);
-            $this->fleet[] = $ev;
-            $this->addCommands($ev, $instruction[1]);
+        $nonEmptyLines = array_filter($this->lines);
+        $ev = null;
+        foreach ($nonEmptyLines as $line) {
+            if ($this->isStartingPositionLine($line)) {
+                $ev = $this->parseEvLine($line);
+                $this->fleet[] = $ev;
+            } else {
+                if ($ev) {
+                    $this->addCommands($ev, $line);
+                }
+            }
         }
     }
 
@@ -83,6 +94,11 @@ class StringFleetInput implements FleetInput
     private function addCommands(ElectricVehicle $ev, string $commands): void
     {
         $this->commands[spl_object_hash($ev)] = $commands;
+    }
+
+    private function isStartingPositionLine(string $line): bool
+    {
+        return preg_match('/^\d+ \d+ \w$/', $line) === 1;
     }
 
     private function headingFromChar(string $char): Heading
