@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Example\Tests\Core\UseCase;
+namespace Example\Tests\Core\UseCase\SimulateElectricVehicleFleet;
 
 use Example\App\Core\Domain\CollissionError;
 use Example\App\Core\UseCase\SimulateElectricVehicleFleet\SimulateElectricVehicleFleet;
