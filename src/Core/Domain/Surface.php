@@ -35,7 +35,6 @@ class Surface
         return count($obstacleCount) > 0;
     }
 
-
     public function addElectricVheicle(ElectricVehicle $ev): void
     {
         $this->vehicles[] = $ev;

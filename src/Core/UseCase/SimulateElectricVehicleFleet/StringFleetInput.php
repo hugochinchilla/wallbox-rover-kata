@@ -22,7 +22,7 @@ class StringFleetInput implements FleetInput
 
     public function __construct(string $input)
     {
-        $this->lines = $this->splitLines(strtoupper($input));
+        $this->lines = $this->splitLines(mb_strtoupper($input));
         $this->readSurface();
         $this->readEvsAndCommands();
     }
@@ -69,9 +69,9 @@ class StringFleetInput implements FleetInput
         }
     }
 
-    private function parseEvLine(string $line)
+    private function parseEvLine(string $line): ElectricVehicle
     {
-        [$x, $y, $heading] = explode(" ", $line);
+        [$x, $y, $heading] = explode(' ', $line);
 
         return new ElectricVehicle(
             $this->surface,
@@ -80,7 +80,7 @@ class StringFleetInput implements FleetInput
         );
     }
 
-    private function addCommands(ElectricVehicle $ev, string $commands)
+    private function addCommands(ElectricVehicle $ev, string $commands): void
     {
         $this->commands[spl_object_hash($ev)] = $commands;
     }
@@ -88,13 +88,13 @@ class StringFleetInput implements FleetInput
     private function headingFromChar(string $char): Heading
     {
         switch ($char) {
-            case "N":
+            case 'N':
                 return Heading::NORTH();
-            case "E":
+            case 'E':
                 return Heading::EAST();
-            case "S":
+            case 'S':
                 return Heading::SOUTH();
-            case "W":
+            case 'W':
                 return Heading::WEST();
             default:
                 throw new InvalidHeading();

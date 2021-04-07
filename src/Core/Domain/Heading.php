@@ -49,9 +49,7 @@ class Heading
             return self::EAST();
         }
 
-        if ($this->equals(self::EAST())) {
-            return self::NORTH();
-        }
+        return self::NORTH();
     }
 
     public function toRight(): self
@@ -68,9 +66,7 @@ class Heading
             return self::WEST();
         }
 
-        if ($this->equals(self::WEST())) {
-            return self::NORTH();
-        }
+        return self::NORTH();
     }
 
     public function toString(): string

@@ -6,5 +6,4 @@ namespace Example\App\Core\Domain;
 
 class CollissionError extends \Exception
 {
-
 }

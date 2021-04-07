@@ -10,7 +10,6 @@ class StringFleetOutput implements FleetOutput
 {
     /**
      * @param ElectricVehicle[] $fleet
-     * @return string
      */
     public function reportFleetStatus(array $fleet): string
     {

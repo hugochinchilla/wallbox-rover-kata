@@ -40,7 +40,7 @@ class ElectricVehicle
         return str_split($command, 1);
     }
 
-    private function moveForward()
+    private function moveForward(): Point
     {
         $newPosition = $this->position;
 
@@ -71,7 +71,7 @@ class ElectricVehicle
         return $newPosition;
     }
 
-    public function position()
+    public function position(): Point
     {
         return $this->position;
     }

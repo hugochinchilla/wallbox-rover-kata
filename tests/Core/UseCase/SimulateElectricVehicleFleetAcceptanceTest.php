@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Example\Tests\Core\UseCase;
 
 use Example\App\Core\Domain\CollissionError;
-use Example\App\Core\UseCase\SimulateElectricVehicleFleet\InvalidHeading;
 use Example\App\Core\UseCase\SimulateElectricVehicleFleet\SimulateElectricVehicleFleet;
-use Example\App\Core\UseCase\SimulateElectricVehicleFleet\StringFleetOutput;
 use Example\App\Core\UseCase\SimulateElectricVehicleFleet\StringFleetInput;
+use Example\App\Core\UseCase\SimulateElectricVehicleFleet\StringFleetOutput;
 use PHPUnit\Framework\TestCase;
 
 /**
