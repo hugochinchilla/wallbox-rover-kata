@@ -92,6 +92,11 @@ class ElectricVehicle
         return $this->position;
     }
 
+    public function direction(): string
+    {
+        return $this->direction;
+    }
+
     private function toString(): string
     {
         return $this->position->toString() . ':' . $this->direction;

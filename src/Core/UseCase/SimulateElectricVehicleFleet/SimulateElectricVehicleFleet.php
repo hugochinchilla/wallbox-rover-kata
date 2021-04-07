@@ -6,17 +6,18 @@ namespace Example\App\Core\UseCase\SimulateElectricVehicleFleet;
 
 class SimulateElectricVehicleFleet
 {
-    public function execute(FleetReader $reader): string
+    public function __construct(private FleetReader $reader, private FleetOutput $output)
     {
-        $outputs = [];
+    }
 
-        foreach ($reader->fleet() as $ev) {
-            $result = $ev->execute($reader->commandsForEv($ev));
-            $outputs[] = str_replace(':', ' ', $result);
+    public function execute(): string
+    {
+        $fleet = $this->reader->fleet();
+
+        foreach ($fleet as $ev) {
+            $ev->execute($this->reader->commandsForEv($ev));
         }
 
-        $outputs[] = '';
-
-        return implode("\n", $outputs);
+        return $this->output->reportFleetStatus($fleet);
     }
 }
