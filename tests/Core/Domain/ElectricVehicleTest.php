@@ -3,6 +3,7 @@
 namespace Example\Tests\Core\Domain;
 
 use Example\App\Core\Domain\ElectricVehicle;
+use Example\App\Core\Domain\Heading;
 use Example\App\Core\Domain\Point;
 use Example\App\Core\Domain\Surface;
 use PHPUnit\Framework\TestCase;
@@ -14,7 +15,7 @@ class ElectricVehicleTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->ev = new ElectricVehicle(new Surface(10, 10), new Point(0, 0), 'N');
+        $this->ev = new ElectricVehicle(new Surface(10, 10), new Point(0, 0), Heading::NORTH());
     }
 
     /**
@@ -65,7 +66,7 @@ class ElectricVehicleTest extends TestCase
      */
     public function an_ev_should_move_forward(string $command, string $expectedResult): void
     {
-        $ev = new ElectricVehicle(new Surface(10,10), new Point(5,5), 'N');
+        $ev = new ElectricVehicle(new Surface(10,10), new Point(5,5), Heading::NORTH());
 
         $result = $ev->execute($command);
 
@@ -85,7 +86,7 @@ class ElectricVehicleTest extends TestCase
     /** @test */
     public function an_ev_can_start_at_any_point(): void
     {
-        $ev = new ElectricVehicle(new Surface(10, 10), new Point(1, 1), 'N');
+        $ev = new ElectricVehicle(new Surface(10, 10), new Point(1, 1), Heading::NORTH());
 
         $result = $ev->execute('M');
 
@@ -95,7 +96,7 @@ class ElectricVehicleTest extends TestCase
     /** @test */
     public function an_ev_can_start_facing_anywhere(): void
     {
-        $ev = new ElectricVehicle(new Surface(10, 10), new Point(0, 0), 'E');
+        $ev = new ElectricVehicle(new Surface(10, 10), new Point(0, 0), Heading::EAST());
 
         $result = $ev->execute('M');
 

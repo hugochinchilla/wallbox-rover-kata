@@ -17,7 +17,7 @@ class StringFleetOutput implements FleetOutput
         $outputs = [];
 
         foreach ($fleet as $ev) {
-            $outputs[] = "{$ev->position()->x()} {$ev->position()->y()} {$ev->direction()}";
+            $outputs[] = "{$ev->position()->x()} {$ev->position()->y()} {$ev->heading()->toString()}";
         }
 
         // adds a trailing newline to the generated output

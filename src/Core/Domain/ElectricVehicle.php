@@ -6,15 +6,15 @@ namespace Example\App\Core\Domain;
 
 class ElectricVehicle
 {
-    private string $direction;
+    private Heading $heading;
     private Point $position;
     private Surface $surface;
 
-    public function __construct(Surface $surface, Point $startingPoint, string $direction)
+    public function __construct(Surface $surface, Point $startingPoint, Heading $heading)
     {
         $this->surface = $surface;
         $this->surface->addElectricVheicle($this);
-        $this->direction = $direction;
+        $this->heading = $heading;
         $this->position = $startingPoint;
     }
 
@@ -22,10 +22,10 @@ class ElectricVehicle
     {
         foreach ($this->parseInstructions($command) as $instruction) {
             if ($instruction === 'L') {
-                $this->direction = $this->rotateLeft();
+                $this->heading = $this->heading->toLeft();
             }
             if ($instruction === 'R') {
-                $this->direction = $this->rotateRight();
+                $this->heading = $this->heading->toRight();
             }
             if ($instruction === 'M') {
                 $this->position = $this->moveForward();
@@ -40,43 +40,23 @@ class ElectricVehicle
         return str_split($command, 1);
     }
 
-    private function rotateLeft(): string
-    {
-        return [
-            'N' => 'W',
-            'W' => 'S',
-            'S' => 'E',
-            'E' => 'N',
-        ][$this->direction];
-    }
-
-    private function rotateRight()
-    {
-        return [
-            'N' => 'E',
-            'E' => 'S',
-            'S' => 'W',
-            'W' => 'N',
-        ][$this->direction];
-    }
-
     private function moveForward()
     {
         $newPosition = $this->position;
 
-        if ($this->direction === 'N') {
+        if ($this->heading->equals(Heading::NORTH())) {
             $newPosition = new Point($this->position->x(), $this->position->y() + 1);
         }
 
-        if ($this->direction === 'W') {
+        if ($this->heading->equals(Heading::WEST())) {
             $newPosition = new Point($this->position->x() - 1, $this->position->y());
         }
 
-        if ($this->direction === 'S') {
+        if ($this->heading->equals(Heading::SOUTH())) {
             $newPosition = new Point($this->position->x(), $this->position->y() - 1);
         }
 
-        if ($this->direction === 'E') {
+        if ($this->heading->equals(Heading::EAST())) {
             $newPosition = new Point($this->position->x() + 1, $this->position->y());
         }
 
@@ -96,13 +76,13 @@ class ElectricVehicle
         return $this->position;
     }
 
-    public function direction(): string
+    public function heading(): Heading
     {
-        return $this->direction;
+        return $this->heading;
     }
 
     private function toString(): string
     {
-        return $this->position->toString() . ':' . $this->direction;
+        return $this->position->toString() . ':' . $this->heading->toString();
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Example\App\Core\UseCase\SimulateElectricVehicleFleet;
 
 use Example\App\Core\Domain\ElectricVehicle;
+use Example\App\Core\Domain\Heading;
 use Example\App\Core\Domain\Point;
 use Example\App\Core\Domain\Surface;
 
@@ -70,13 +71,33 @@ class StringFleetInput implements FleetInput
 
     private function parseEvLine(string $line)
     {
-        [$x, $y, $direction] = explode(" ", $line);
+        [$x, $y, $heading] = explode(" ", $line);
 
-        return new ElectricVehicle($this->surface, new Point((int) $x, (int) $y), $direction);
+        return new ElectricVehicle(
+            $this->surface,
+            new Point((int) $x, (int) $y),
+            $this->headingFromChar($heading),
+        );
     }
 
     private function addCommands(ElectricVehicle $ev, string $commands)
     {
         $this->commands[spl_object_hash($ev)] = $commands;
+    }
+
+    private function headingFromChar(string $char): Heading
+    {
+        switch ($char) {
+            case "N":
+                return Heading::NORTH();
+            case "E":
+                return Heading::EAST();
+            case "S":
+                return Heading::SOUTH();
+            case "W":
+                return Heading::WEST();
+            default:
+                throw new InvalidHeading();
+        }
     }
 }
