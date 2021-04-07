@@ -35,4 +35,16 @@ class SimulateElectricVehicleFleetAcceptanceTest extends TestCase
 
         $this->assertEquals("1 3 N\n5 1 E\n", $output);
     }
+
+    /** @test */
+    public function handles_input_in_lowercase(): void
+    {
+        $input = new StringFleetInput("5 5\n1 2 n\nlmlmlmlmm\n");
+        $output = new StringFleetOutput();
+        $simulator = new SimulateElectricVehicleFleet($input, $output);
+
+        $output = $simulator->execute();
+
+        $this->assertEquals("1 3 N\n", $output);
+    }
 }

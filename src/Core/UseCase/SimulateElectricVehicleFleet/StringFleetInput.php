@@ -22,7 +22,7 @@ class StringFleetInput implements FleetInput
 
     public function __construct(string $input)
     {
-        $this->lines = $this->splitLines($input);
+        $this->lines = $this->splitLines(strtoupper($input));
         $this->readSurface();
         $this->readEvsAndCommands();
     }
