@@ -11,5 +11,5 @@ interface FleetOutput
     /**
      * @param ElectricVehicle[] $fleet
      */
-    public function reportFleetStatus(array $fleet): string;
+    public function loadFleetData(array $fleet): void;
 }

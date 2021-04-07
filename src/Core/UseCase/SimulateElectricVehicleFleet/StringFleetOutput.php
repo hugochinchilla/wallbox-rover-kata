@@ -8,10 +8,12 @@ use Example\App\Core\Domain\ElectricVehicle;
 
 class StringFleetOutput implements FleetOutput
 {
+    private string $output = '';
+
     /**
      * @param ElectricVehicle[] $fleet
      */
-    public function reportFleetStatus(array $fleet): string
+    public function loadFleetData(array $fleet): void
     {
         $outputs = [];
 
@@ -22,6 +24,11 @@ class StringFleetOutput implements FleetOutput
         // adds a trailing newline to the generated output
         $outputs[] = '';
 
-        return implode("\n", $outputs);
+        $this->output = implode("\n", $outputs);
+    }
+
+    public function readValue(): string
+    {
+        return $this->output;
     }
 }

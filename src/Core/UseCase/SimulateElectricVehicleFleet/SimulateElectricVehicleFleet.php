@@ -10,7 +10,7 @@ class SimulateElectricVehicleFleet
     {
     }
 
-    public function execute(): string
+    public function execute(): void
     {
         $fleet = $this->input->fleet();
 
@@ -18,6 +18,6 @@ class SimulateElectricVehicleFleet
             $ev->execute($this->input->commandsForEv($ev));
         }
 
-        return $this->output->reportFleetStatus($fleet);
+        $this->output->loadFleetData($fleet);
     }
 }
