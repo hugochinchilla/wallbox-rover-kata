@@ -2,6 +2,7 @@
 
 namespace Example\Tests\Core\UseCase;
 
+use Example\App\Core\Domain\CollissionError;
 use Example\App\Core\UseCase\SimulateElectricVehicleFleet\SimulateElectricVehicleFleet;
 use Example\App\Core\UseCase\SimulateElectricVehicleFleet\StringFleetOutput;
 use Example\App\Core\UseCase\SimulateElectricVehicleFleet\StringFleetInput;
@@ -56,6 +57,18 @@ class SimulateElectricVehicleFleetAcceptanceTest extends TestCase
         $simulator = new SimulateElectricVehicleFleet($input, $output);
 
         $this->expectException(\OutOfBoundsException::class);
+
+        $simulator->execute();
+    }
+
+    /** @test */
+    public function throw_collission_error_when_charshing_against_another_ev(): void
+    {
+        $input = new StringFleetInput("2 1\n2 1 N\nL\n1 1 E\nM\n");
+        $output = new StringFleetOutput();
+        $simulator = new SimulateElectricVehicleFleet($input, $output);
+
+        $this->expectException(CollissionError::class);
 
         $simulator->execute();
     }

@@ -80,8 +80,12 @@ class ElectricVehicle
             $newPosition = new Point($this->position->x() + 1, $this->position->y());
         }
 
-        if (!$this->surface->isValidDestination($newPosition)) {
+        if (!$this->surface->isDestinationWithinBounds($newPosition)) {
             throw new \OutOfBoundsException();
+        }
+
+        if ($this->surface->isPositionOccupiedByAnotherEV($newPosition)) {
+            throw new CollissionError();
         }
 
         return $newPosition;

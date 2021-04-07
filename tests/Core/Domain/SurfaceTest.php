@@ -14,7 +14,7 @@ class SurfaceTest extends TestCase
     {
         $surface = new Surface(10,10);
 
-        $this->assertTrue($surface->isValidDestination(new Point(0, 0)));
+        $this->assertTrue($surface->isDestinationWithinBounds(new Point(0, 0)));
     }
 
     /** @test */
@@ -22,19 +22,19 @@ class SurfaceTest extends TestCase
     {
         $surface = new Surface(10,10);
 
-        $this->assertFalse($surface->isValidDestination(new Point(11, 10)));
-        $this->assertFalse($surface->isValidDestination(new Point(10, 11)));
-        $this->assertFalse($surface->isValidDestination(new Point(-1, 0)));
-        $this->assertFalse($surface->isValidDestination(new Point(0, -1)));
+        $this->assertFalse($surface->isDestinationWithinBounds(new Point(11, 10)));
+        $this->assertFalse($surface->isDestinationWithinBounds(new Point(10, 11)));
+        $this->assertFalse($surface->isDestinationWithinBounds(new Point(-1, 0)));
+        $this->assertFalse($surface->isDestinationWithinBounds(new Point(0, -1)));
     }
 
     /** @test */
-    public function a_position_occupied_by_an_ev_is_not_a_valid_destination(): void
+    public function a_position_can_be_checked_for_presence_of_another_ev(): void
     {
         $surface = new Surface(10,10);
         new ElectricVehicle($surface, new Point(0, 0), 'N');
 
-        $this->assertFalse($surface->isValidDestination(new Point(0, 0)));
+        $this->assertTrue($surface->isPositionOccupiedByAnotherEV(new Point(0, 0)));
     }
 
     /** @test */
@@ -44,7 +44,7 @@ class SurfaceTest extends TestCase
         $ev = new ElectricVehicle($surface, new Point(0, 0), 'N');
         $ev->execute('M');
 
-        $this->assertTrue($surface->isValidDestination(new Point(0, 0)));
-        $this->assertFalse($surface->isValidDestination(new Point(0, 1)));
+        $this->assertFalse($surface->isPositionOccupiedByAnotherEV(new Point(0, 0)));
+        $this->assertTrue($surface->isPositionOccupiedByAnotherEV(new Point(0, 1)));
     }
 }

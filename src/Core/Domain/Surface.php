@@ -15,7 +15,7 @@ class Surface
     {
     }
 
-    public function isValidDestination(Point $point): bool
+    public function isDestinationWithinBounds(Point $point): bool
     {
         if ($point->x() > $this->maxX || $point->y() > $this->maxY) {
             return false;
@@ -25,10 +25,16 @@ class Surface
             return false;
         }
 
+        return true;
+    }
+
+    public function isPositionOccupiedByAnotherEV(Point $point): bool
+    {
         $obstacleCount = array_filter($this->vehicles, fn (ElectricVehicle $ev) => $ev->position()->equals($point));
 
-        return count($obstacleCount) === 0;
+        return count($obstacleCount) > 0;
     }
+
 
     public function addElectricVheicle(ElectricVehicle $ev): void
     {
