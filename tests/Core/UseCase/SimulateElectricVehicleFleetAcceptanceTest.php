@@ -4,7 +4,7 @@ namespace Example\Tests\Core\UseCase;
 
 use Example\App\Core\UseCase\SimulateElectricVehicleFleet\SimulateElectricVehicleFleet;
 use Example\App\Core\UseCase\SimulateElectricVehicleFleet\StringFleetOutput;
-use Example\App\Core\UseCase\SimulateElectricVehicleFleet\StringFleetReader;
+use Example\App\Core\UseCase\SimulateElectricVehicleFleet\StringFleetInput;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -15,9 +15,9 @@ class SimulateElectricVehicleFleetAcceptanceTest extends TestCase
     /** @test */
     public function read_surface_definition_and_single_ev(): void
     {
-        $reader = new StringFleetReader("5 5\n1 2 N\nLMLMLMLMM\n");
+        $input = new StringFleetInput("5 5\n1 2 N\nLMLMLMLMM\n");
         $output = new StringFleetOutput();
-        $simulator = new SimulateElectricVehicleFleet($reader, $output);
+        $simulator = new SimulateElectricVehicleFleet($input, $output);
 
         $output = $simulator->execute();
 
@@ -27,9 +27,9 @@ class SimulateElectricVehicleFleetAcceptanceTest extends TestCase
     /** @test */
     public function read_surface_definition_and_multiple_ev(): void
     {
-        $reader = new StringFleetReader("5 5\n1 2 N\nLMLMLMLMM\n3 3 E\nMMRMMRMRRM\n");
+        $input = new StringFleetInput("5 5\n1 2 N\nLMLMLMLMM\n3 3 E\nMMRMMRMRRM\n");
         $output = new StringFleetOutput();
-        $simulator = new SimulateElectricVehicleFleet($reader, $output);
+        $simulator = new SimulateElectricVehicleFleet($input, $output);
 
         $output = $simulator->execute();
 

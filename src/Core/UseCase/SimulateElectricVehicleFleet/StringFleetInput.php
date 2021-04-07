@@ -8,7 +8,7 @@ use Example\App\Core\Domain\ElectricVehicle;
 use Example\App\Core\Domain\Point;
 use Example\App\Core\Domain\Surface;
 
-class StringFleetReader implements FleetReader
+class StringFleetInput implements FleetInput
 {
     private array $lines = [];
     private Surface $surface;

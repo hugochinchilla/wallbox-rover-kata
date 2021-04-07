@@ -5,7 +5,7 @@ namespace Example\App\Core\UseCase\SimulateElectricVehicleFleet;
 use Example\App\Core\Domain\ElectricVehicle;
 use Example\App\Core\Domain\Surface;
 
-interface FleetReader
+interface FleetInput
 {
     public function surface(): Surface;
 
