@@ -32,7 +32,7 @@ class ElectricVehicle
             }
         }
 
-        return $this->position->toString() . ':' . $this->direction;
+        return $this->toString();
     }
 
     private function parseInstructions(string $command): array
@@ -90,5 +90,10 @@ class ElectricVehicle
     public function position()
     {
         return $this->position;
+    }
+
+    private function toString(): string
+    {
+        return $this->position->toString() . ':' . $this->direction;
     }
 }
