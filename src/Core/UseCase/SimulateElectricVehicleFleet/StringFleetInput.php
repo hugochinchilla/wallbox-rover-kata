@@ -10,9 +10,8 @@ use Example\App\Core\Domain\Surface;
 
 class StringFleetInput implements FleetInput
 {
-    private array $lines = [];
+    private array $lines;
     private Surface $surface;
-
     private array $commands;
 
     /**
