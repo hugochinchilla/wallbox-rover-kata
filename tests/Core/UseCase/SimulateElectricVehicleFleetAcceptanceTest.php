@@ -22,9 +22,9 @@ class SimulateElectricVehicleFleetAcceptanceTest extends TestCase
         $output = new StringFleetOutput();
         $simulator = new SimulateElectricVehicleFleet($input, $output);
 
-        $output = $simulator->execute();
+        $result = $simulator->execute();
 
-        $this->assertEquals("1 3 N\n", $output);
+        $this->assertEquals("1 3 N\n", $result);
     }
 
     /** @test */
@@ -34,9 +34,9 @@ class SimulateElectricVehicleFleetAcceptanceTest extends TestCase
         $output = new StringFleetOutput();
         $simulator = new SimulateElectricVehicleFleet($input, $output);
 
-        $output = $simulator->execute();
+        $result = $simulator->execute();
 
-        $this->assertEquals("1 3 N\n5 1 E\n", $output);
+        $this->assertEquals("1 3 N\n5 1 E\n", $result);
     }
 
     /** @test */
@@ -46,9 +46,9 @@ class SimulateElectricVehicleFleetAcceptanceTest extends TestCase
         $output = new StringFleetOutput();
         $simulator = new SimulateElectricVehicleFleet($input, $output);
 
-        $output = $simulator->execute();
+        $result = $simulator->execute();
 
-        $this->assertEquals("1 3 N\n", $output);
+        $this->assertEquals("1 3 N\n", $result);
     }
 
     /** @test */
