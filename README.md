@@ -1,3 +1,43 @@
+# How to run
+
+### If you have docker
+
+Create a dotenv file with your current UID so docker-compose doesn't mess your directory permissions:
+
+```
+echo UID=`id -u` >> .env
+```
+
+Install dependencies:
+
+```
+$ make deps
+```
+
+Run the test suite:
+
+```
+$ make test
+```
+
+### Without docker
+
+You will need to have php 8.0 installed and composer 2.
+
+Install dependencies:
+
+```
+$ composer install
+```
+
+Run the test suite:
+
+```
+$ composer run test
+```
+
+<hr>
+
 # Backend Challenge
 
 ## Learning Competencies
