@@ -47,4 +47,16 @@ class SimulateElectricVehicleFleetAcceptanceTest extends TestCase
 
         $this->assertEquals("1 3 N\n", $output);
     }
+
+    /** @test */
+    public function throws_out_of_bonds_errors_when_crashing_with_surface_limits(): void
+    {
+        $input = new StringFleetInput("1 1\n1 2 N\nMM\n");
+        $output = new StringFleetOutput();
+        $simulator = new SimulateElectricVehicleFleet($input, $output);
+
+        $this->expectException(\OutOfBoundsException::class);
+
+        $simulator->execute();
+    }
 }
