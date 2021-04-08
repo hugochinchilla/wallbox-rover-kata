@@ -6,6 +6,7 @@ namespace Example\App\Core\UseCase\SimulateElectricVehicleFleet;
 
 use Example\App\Core\Domain\ElectricVehicle;
 use Example\App\Core\Domain\Heading;
+use Example\App\Core\Domain\InvalidHeadingError;
 use Example\App\Core\Domain\Point;
 use Example\App\Core\Domain\Surface;
 
@@ -113,7 +114,7 @@ class StringFleetInput implements FleetInput
             case 'W':
                 return Heading::WEST();
             default:
-                throw new InvalidHeading();
+                throw new InvalidHeadingError();
         }
     }
 }
